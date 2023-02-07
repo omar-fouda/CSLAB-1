@@ -2,14 +2,20 @@
 #include <iostream>
 using namespace std;
 
-int main()
-{
-int val[] = { 60, 100, 120 };
-int wt[] = { 10, 20, 30 };
-int W = 50;
-int n = sizeof(val) / sizeof(val[0]);
-cout << knapSack(W, wt, val, n); 
-return 0;
+int main() {
+   cout << "Enter the number of items in a Knapsack:";
+   int n, W;
+   cin >> n;
+   int v[n], w[n];
+   for (int i = 0; i < n; i++) {
+      cout << "Enter value and weight for item " << i << ":";
+      cin >> v[i];
+      cin >> w[i];
+   }
+   cout << "Enter the capacity of knapsack";
+   cin >> W;
+   cout << knapSack(W, w, v, n);
+   return 0;
 }
 
 
