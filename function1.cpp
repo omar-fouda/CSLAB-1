@@ -2,20 +2,22 @@
 #include "function1.h"
 using namespace std;
 
-int function1:: max(int a, int b) { return (a > b) ? a : b; }
-int function1:: knapSack(int W, int wt[], int val[], int n)
-{
-if (n == 0 || W == 0) // Base Case
-return 0;
-// If weight of the nth item is more than Knapsack capacity W, then this item cannot
-be included
-// in the optimal solution
-if (wt[n - 1] > W)
-return knapSack(W, wt, val, n - 1);
-// Return the maximum of two cases:
-// (1) nth item included
-// (2) not included
-else
-return max(val[n - 1] + knapSack(W - wt[n - 1], wt, val, n - 1), knapSack(W, wt,
-val, n - 1));
+int max(int x, int y) {
+   return (x > y) ? x : y;
 }
+int knapSack(int W, int w[], int v[], int n) {
+   int i, wt;
+   int K[n + 1][W + 1];
+   for (i = 0; i <= n; i++) {
+      for (wt = 0; wt <= W; wt++) {
+         if (i == 0 || wt == 0)
+         K[i][wt] = 0;
+         else if (w[i - 1] <= wt)
+            K[i][wt] = max(v[i - 1] + K[i - 1][wt - w[i - 1]], K[i - 1][wt]);
+         else
+        K[i][wt] = K[i - 1][wt];
+      }
+   }
+   return K[n][W];
+}
+
